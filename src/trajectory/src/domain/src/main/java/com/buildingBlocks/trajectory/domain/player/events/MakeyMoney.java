@@ -1,25 +1,24 @@
 package com.buildingBlocks.trajectory.domain.player.events;
 
 import com.buildingBlocks.trajectory.domain.player.values.Diner;
-import com.buildingBlocks.trajectory.domain.player.values.Salary;
 import com.buildingblocks.shared.domain.generic.DomainEvent;
 
 public class MakeyMoney extends DomainEvent {
 
     private final Diner amount;
-    private Salary salary = null;
+    private Diner salary = Diner.of(0);
 
     public MakeyMoney(Diner amount){
         super(EventsNameEnum.MAKEY_MONEY.name());
         this.amount = amount;
-        this.salary = salary;
+        this.salary = Diner.of(0);
     }
 
     public Diner getAmount() {
         return amount;
     }
 
-    public Salary getSalary() {
+    public Diner getSalary() {
         return salary;
     }
 

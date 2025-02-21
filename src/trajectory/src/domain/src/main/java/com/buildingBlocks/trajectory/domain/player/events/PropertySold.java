@@ -1,23 +1,20 @@
 package com.buildingBlocks.trajectory.domain.player.events;
 
-import com.buildingBlocks.trajectory.domain.player.values.Address;
-import com.buildingBlocks.trajectory.domain.player.values.Diner;
-import com.buildingBlocks.trajectory.domain.player.values.TypeProperty;
+import com.buildingBlocks.trajectory.domain.player.values.TypePropertyEnum;
 import com.buildingblocks.shared.domain.generic.DomainEvent;
 
 public class PropertySold extends DomainEvent {
-    private final String id;
-    private final Address address;
-    private final Diner value;
-    private final TypeProperty type;
+    private String id;
+    private String address;
+    private Integer value;
+    private TypePropertyEnum type;
 
-    public PropertySold(String id, Address address, Diner value, TypeProperty type){
+    public PropertySold(String id, String address, Integer value, TypePropertyEnum type){
         super(EventsNameEnum.PROPERTY_SOLD.name());
         this.id = id;
         this.address = address;
         this.value = value;
         this.type = type;
-
     }
 
 
@@ -26,15 +23,15 @@ public class PropertySold extends DomainEvent {
         return id;
     }
 
-    public Address getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public Diner getValue() {
+    public Integer getValue() {
         return value;
     }
 
-    public TypeProperty getType() {
+    public TypePropertyEnum getType() {
         return type;
     }
 }

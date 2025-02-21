@@ -6,11 +6,10 @@ import com.buildingblocks.shared.domain.generic.DomainEvent;
 
 public class IsRewarded extends DomainEvent {
 
-    private final String id;
     private final String nameReward;
     private final String descriptionReward;
-    private final StateEvent state;
-    private final TypeEvent type;
+    private final String state;
+    private final String type;
     private final String value;
 
     public String getNameReward() {
@@ -21,21 +20,21 @@ public class IsRewarded extends DomainEvent {
         return descriptionReward;
     }
 
-    public StateEvent getState() {
+    public String getState() {
         return state;
-    }
-
-    public TypeEvent getType() {
-        return type;
     }
 
     public String getValue() {
         return value;
     }
 
-    public IsRewarded(String id, String nameReward, String descriptionReward, StateEvent state, TypeEvent type, String value){
+    public String getType() {
+        return type;
+    }
+
+
+    public IsRewarded( String nameReward, String descriptionReward, String state, String type, String value){
         super(NameEventsListEnum.IS_REWARDED.name());
-        this.id = id;
         this.nameReward = nameReward;
         this.descriptionReward = descriptionReward;
         this.state = state;
@@ -43,8 +42,5 @@ public class IsRewarded extends DomainEvent {
         this.value = value;
     }
 
-    public String getId() {
-        return id;
-    }
 
 }

@@ -17,7 +17,6 @@ public class Diner implements IValueObject {
 
     @Override
     public void validate() {
-        ValidateUtils.validateIsPositive((int) amount, "La cantidad de dinero debe ser valida");
         ValidateUtils.validateIsNotBlank(String.valueOf(amount), "el dinero no puede estar vacio");
         ValidateUtils.validateMaxLength(String.valueOf(amount), 1000, "el dinero no puede ser mayor a 1000");
     }

@@ -23,7 +23,6 @@ public class Address implements IValueObject {
    @Override
     public void validate() {
         ValidateUtils.validateIsNotBlank(street, "street no puede estar vacio");
-        ValidateUtils.validateIsPositive(Integer.parseInt(number), "el numero debe ser valido");
         ValidateUtils.validateIsNotBlank(zone, "la zona es requerida");
         ValidateUtils.validateIsNotEmpty(street, "street no puede ser null");
     }

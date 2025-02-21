@@ -17,7 +17,7 @@ public abstract class AggregateRoot<I extends Identity> extends Entity<I> {
     actionsHandler.getEvents().clear();
   }
 
-  protected void subscribe(final PlayerHandler container) {
+  protected  void subscribe(final DomainActionsContainer container){
     actionsHandler.subscribe(container);
   }
 

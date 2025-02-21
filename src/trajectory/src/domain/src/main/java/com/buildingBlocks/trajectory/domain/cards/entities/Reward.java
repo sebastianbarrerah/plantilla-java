@@ -27,28 +27,32 @@ public class Reward extends Entity<CardId> {
         this.valueReward = valueReward;
     }
 
-//    public  adquiereReward() {
-//        typeReward.getTypeReward() == TypeEventEffectEnum.FAMILY ?
-//                valueReward.setValue(valueReward.getValue() + 100) :
-//                valueReward.setValue(valueReward.getValue() + 50);
-//    }
-//
-//    public rewardUpdate() {
-//        const value = valueReward.getValue();
-//        int salaryActual = Salary.getSalary().getAmount();
-//        if(adquiereReward()){
-//            salaryActual = salaryActual + value;
-//            Salary.setSalary(salaryActual);
-//        }
-//    }
-//
-//    public assignReward() {
-//        long premio = 1000;
-//        if(typeEvent.getTypeEvent() == typeEventEnum.individualImpact && valueReward.getValue() > 0){
-//            typeReward.setTypeReward(TypeEventEffectEnum.PLAYER);
-//            Salary.setSalary(Salary.getSalary().getAmount() + premio);
-//        }
-//    }
+
+
+    public NameReward getNameReward() {
+        return nameReward;
+    }
+
+    public DescriptionReward getDescriptionReward() {
+        return descriptionReward;
+    }
+
+    public TypeReward getTypeReward() {
+        return typeReward;
+    }
+
+    public Integer getValueReward() {
+        return valueReward;
+    }
+
+    public Reward(String nameReward, String descriptionReward, String value, NameReward nameReward1, DescriptionReward descriptionReward1, TypeReward typeReward, Integer valueReward) {
+        super(new CardId());
+        this.nameReward = nameReward1;
+        this.descriptionReward = descriptionReward1;
+        this.typeReward = typeReward;
+        this.valueReward = valueReward;
+    }
+
 
 
 }
