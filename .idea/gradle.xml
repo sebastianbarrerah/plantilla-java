@@ -10,7 +10,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/shared" />
+            <option value="$PROJECT_DIR$/src/shared/src/application" />
             <option value="$PROJECT_DIR$/src/shared/src/domain" />
+            <option value="$PROJECT_DIR$/src/trajectory/src/application" />
             <option value="$PROJECT_DIR$/src/trajectory/src/domain" />
             <option value="$PROJECT_DIR$/trajectory" />
           </set>

@@ -1,9 +1,12 @@
 rootProject.name = 'building-blocks'
 
 include ':shared:domain'
+include ':shared:application'
 include ':trajectory:domain'
+include ':trajectory:application'
 
 project(':shared:domain').projectDir = file('./src/shared/src/domain')
+project(':shared:application').projectDir = file('./src/shared/src/application')
 project(':trajectory:domain').projectDir = file('./src/trajectory/src/domain')
-
+project(':trajectory:application').projectDir = file('./src/trajectory/src/application')
 

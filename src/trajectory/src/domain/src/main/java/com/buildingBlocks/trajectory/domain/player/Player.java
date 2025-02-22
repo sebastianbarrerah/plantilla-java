@@ -6,6 +6,7 @@ import com.buildingBlocks.trajectory.domain.player.entities.UniversityCareer;
 import com.buildingBlocks.trajectory.domain.player.events.*;
 import com.buildingBlocks.trajectory.domain.player.values.*;
 import com.buildingblocks.shared.domain.generic.AggregateRoot;
+import com.buildingblocks.shared.domain.generic.DomainEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +78,13 @@ public class Player extends AggregateRoot<PlayerId> {
         }
         this.money = new Diner(this.money.getAmount() - amount.getAmount());
         apply(new LoseMoney(amount));
+    }
+
+    public static Player from(final String identity, final List<DomainEvent> events) {
+        Player player = new Player(PlayerId.of(identity));
+        events.forEach(player::apply);
+        return player;
+
     }
 
 }
