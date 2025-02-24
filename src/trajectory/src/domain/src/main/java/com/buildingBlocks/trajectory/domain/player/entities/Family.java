@@ -1,43 +1,40 @@
 package com.buildingBlocks.trajectory.domain.player.entities;
 
-import com.buildingBlocks.trajectory.domain.player.values.Children;
-import com.buildingBlocks.trajectory.domain.player.values.Coupe;
 import com.buildingBlocks.trajectory.domain.player.values.PlayerId;
 import com.buildingblocks.shared.domain.generic.Entity;
 import com.buildingblocks.shared.domain.generic.Identity;
 
 public class Family extends Entity<PlayerId> {
-    private  Coupe couple;
-    private  Children children;
+    private  Boolean coupe = false;
+    private  Integer children = 0;
 
-    public Family( Coupe couple, Children children){
+    public Family( Boolean coupe, Integer children){
         super(new PlayerId());
-        this.couple = couple;
+        this.coupe = coupe;
         this.children = children;
     }
 
-    public Family(Identity id, Coupe couple, Children children){
+    public Family(Identity id, Boolean coupe, Integer children){
         super((PlayerId) id);
-        this.couple = couple;
+        this.coupe = coupe;
         this.children = children;
     }
 
-    public Coupe getCouple() {
-        return couple;
+    //region getters and setters
+    public Boolean getCoupe() {
+        return coupe;
     }
 
-//    public Children addChildrenToFamily() {
-//        children.getNumberOfChildren() == 0 ?
-//                children.setNumberOfChildren(1) :
-//                children.setNumberOfChildren(children.getNumberOfChildren() + 1);
-//        return null;
-//    };
-//
-//    public StateChange changeStateOfPlayer() {
-//        StateChange.getStateChange().getStatePlayer() == StatePlayerEnum.ACTIVE ?
-//                StateChange.getStateChange().setStatePlayer(StatePlayerEnum.RETIRED) :
-//                StateChange.getStateChange().setStatePlayer(StatePlayerEnum.ACTIVE);
-//        return null;
-//    };
+    public void setCoupe(Boolean coupe) {
+        this.coupe = coupe;
+    }
 
+    public Integer getChildren() {
+        return children;
+    }
+
+    public void setChildren(Integer children) {
+        this.children = children;
+    }
+    //endregion
 }

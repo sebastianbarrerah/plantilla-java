@@ -4,14 +4,14 @@ import com.buildingblocks.shared.domain.generic.IValueObject;
 import com.buildingblocks.shared.domain.utils.ValidateUtils;
 
 public class EducationalLevel implements IValueObject {
-    private final StatusLevelEnum level;
+    private final String level;
 
-    private EducationalLevel(StatusLevelEnum level){
+    private EducationalLevel(String level){
         this.level = level;
         validate();
     }
 
-    public static EducationalLevel of(StatusLevelEnum level){
+    public static EducationalLevel of(String level){
         return new EducationalLevel(level);
     }
 
@@ -21,7 +21,7 @@ public class EducationalLevel implements IValueObject {
         ValidateUtils.validateIsNotEmpty(String.valueOf(level), "el nivel de educacion no puede ser null");
     }
 
-    public StatusLevelEnum getLevel() {
+    public String getLevel() {
         return level;
     }
 }

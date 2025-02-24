@@ -1,9 +1,12 @@
 package com.buildingBlocks.trajectory.domain.cards;
 
 import com.buildingBlocks.trajectory.domain.cards.entities.Reward;
-import com.buildingBlocks.trajectory.domain.cards.events.CancelledEvent;
+import com.buildingBlocks.trajectory.domain.cards.events.CardApplied;
+import com.buildingBlocks.trajectory.domain.cards.events.CardDiscarded;
 import com.buildingBlocks.trajectory.domain.cards.events.GroupImpact;
 import com.buildingBlocks.trajectory.domain.cards.events.IsRewarded;
+import com.buildingBlocks.trajectory.domain.cards.values.Card;
+import com.buildingBlocks.trajectory.domain.cards.values.TypeEventEffectEnum;
 import com.buildingblocks.shared.domain.generic.DomainActionsContainer;
 import com.buildingblocks.shared.domain.generic.DomainEvent;
 
@@ -11,32 +14,48 @@ import java.util.function.Consumer;
 
 public class CardsHandler extends DomainActionsContainer {
 
-    public CardsHandler(Cards card){
-        add(handleCancelledEvent(card));
-        add(handleGroupImpact(card));
-        add(handleIsRewarded(card));
+    public CardsHandler(Cards cardEvent){
+        add(cardApplied(cardEvent));
+        add(cardDiscarded(cardEvent));
+        add(groupImpact(cardEvent));
+        add(isRewarded(cardEvent));
     }
 
-    private Consumer<DomainEvent> handleCancelledEvent(Cards card) {
-        return event -> {
-            CancelledEvent cancelledEvent = (CancelledEvent) event;
-            System.out.println("Event Cancelled: " + cancelledEvent.getId());
+    public Consumer<? extends DomainEvent> cardApplied(Cards cardEvent) {
+        return (CardApplied event) -> {
+            String type = event.getType();
+            String effect = event.getEffect();
+            cardEvent.getListCards().add(Card.of(type, effect, 0));
         };
     }
 
-    private Consumer<DomainEvent> handleGroupImpact(Cards card) {
-        return event -> {
-            GroupImpact groupImpact = (GroupImpact) event;
-            System.out.println("Group Impact Applied: " + groupImpact.getValue());
+    public Consumer<? extends DomainEvent> cardDiscarded(Cards cardEvent) {
+        return (CardDiscarded event) -> {
+            cardEvent.getListCards().add(Card.of("type", "effect", 0));
+                cardEvent.getListCards().remove(cardEvent.getListCards().size() - 1);
         };
     }
 
-    private Consumer<DomainEvent> handleIsRewarded(Cards card) {
-        return event -> {
-            IsRewarded isRewarded = (IsRewarded) event;
-            System.out.println("Reward Assigned: " + isRewarded.getNameReward());
+
+    public Consumer<? extends DomainEvent> groupImpact(Cards cardEvent) {
+        return (GroupImpact event) -> {
+            Integer value = event.getValue();
+            cardEvent.getType().equals(TypeEventEffectEnum.ALL_PLAYERS);
+            cardEvent.getListCards().forEach(card -> card.getValueCard().equals(value));
         };
     }
+
+    public Consumer<? extends DomainEvent> isRewarded(Cards cardEvent) {
+        return (IsRewarded event) -> {
+            Reward reward = new Reward(event.getNameReward(), event.getDescriptionReward(), event.getType(), event.getValue());
+            cardEvent.getRewards().add(reward);
+        };
+    }
+
+
+
+
+
 }
 
 

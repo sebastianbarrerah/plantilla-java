@@ -1,36 +1,31 @@
 package com.buildingBlocks.trajectory.domain.player.events;
 
-import com.buildingBlocks.trajectory.domain.player.values.Address;
-import com.buildingBlocks.trajectory.domain.player.values.Diner;
-import com.buildingBlocks.trajectory.domain.player.values.TypeProperty;
-import com.buildingBlocks.trajectory.domain.player.values.ValueProperty;
 import com.buildingblocks.shared.domain.generic.DomainEvent;
 
 public class AcquiredProperty extends DomainEvent {
 
-        private final Address address;
-        private final Diner value;
-        private final TypeProperty type;
+        private final String address;
+        private final Integer value;
+        private final String type;
 
-    public AcquiredProperty(Address address, Diner value, TypeProperty type){
+    public AcquiredProperty(String address, Integer value, String type){
         super(EventsNameEnum.ACQUIRED_PROPERTY.name());
         this.address = address;
         this.value = value;
         this.type = type;
     }
 
-
-    public Address getAddress() {
+    //region getters and setters
+    public String getAddress() {
         return address;
     }
 
-    public Diner getValue() {
+    public Integer getValue() {
         return value;
     }
 
-    public TypeProperty getType() {
+    public String getType() {
         return type;
     }
-
-
+    //endregion
 }

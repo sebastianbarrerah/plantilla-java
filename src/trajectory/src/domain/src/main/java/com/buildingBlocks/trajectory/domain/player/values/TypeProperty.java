@@ -4,14 +4,14 @@ import com.buildingblocks.shared.domain.generic.IValueObject;
 import com.buildingblocks.shared.domain.utils.ValidateUtils;
 
 public class TypeProperty implements IValueObject {
-    private final TypePropertyEnum typeProperty;
+    private final String typeProperty;
 
-    public TypeProperty(TypePropertyEnum typeProperty){
+    public TypeProperty(String typeProperty){
         this.typeProperty = typeProperty;
         validate();
     }
 
-    public static TypeProperty of(TypePropertyEnum typeProperty){
+    public static TypeProperty of(String typeProperty){
         return new TypeProperty(typeProperty);
     }
 
@@ -22,7 +22,7 @@ public class TypeProperty implements IValueObject {
         ValidateUtils.validateIsString(String.valueOf(typeProperty), "el tipo de propiedad no puede ser un numero");
     }
 
-    public TypePropertyEnum getTypeProperty() {
+    public String getTypeProperty() {
         return typeProperty;
     }
 }

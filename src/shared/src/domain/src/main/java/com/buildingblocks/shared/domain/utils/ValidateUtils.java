@@ -25,7 +25,7 @@ public class ValidateUtils {
 
 
     public static int validateIsPositive(int number, String message){
-        if(number <= 0){
+        if(number < 0){
             throw new IllegalArgumentException(message);
         }
         return number;

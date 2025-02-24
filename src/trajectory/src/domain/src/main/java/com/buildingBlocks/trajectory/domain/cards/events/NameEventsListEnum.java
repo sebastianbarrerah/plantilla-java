@@ -8,5 +8,7 @@ public enum NameEventsListEnum {
     IS_REWARDED,
     POSTPONED_EVENT,
     TAKEN_DECISION,
-    UPDATE_REWARD
+    UPDATE_REWARD,
+    CARD_APPLIED,
+    CARD_DISCARDED
 }

@@ -5,26 +5,26 @@ import com.buildingBlocks.trajectory.domain.cards.values.TypeEvent;
 import com.buildingblocks.shared.domain.generic.DomainEvent;
 
 public class GroupImpact extends DomainEvent {
-    private final TypeEvent type;
-    private final StateEvent state;
-    private final String value;
+    private final String type;
+    private final String state;
+    private final Integer value;
 
-    public GroupImpact(TypeEvent type, StateEvent state, String value){
+    public GroupImpact(String type, String state, Integer value){
         super(NameEventsListEnum.GROUP_IMPACT.name());
         this.type = type;
         this.state = state;
         this.value = value;
     }
 
-    public TypeEvent getType() {
+    public String getType() {
         return type;
     }
 
-    public StateEvent getState() {
+    public String getState() {
         return state;
     }
 
-    public String getValue() {
+    public Integer getValue() {
         return value;
     }
 }

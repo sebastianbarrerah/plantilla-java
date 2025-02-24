@@ -5,14 +5,14 @@ import com.buildingblocks.shared.domain.generic.IValueObject;
 import com.buildingblocks.shared.domain.utils.ValidateUtils;
 
 public class TypeEvent implements IValueObject {
-    private final TypeEventEnum typeEvent;
+    private final TypeEventEffectEnum typeEvent;
 
-    private TypeEvent(TypeEventEnum typeEvent){
+    private TypeEvent(TypeEventEffectEnum typeEvent){
         this.typeEvent = typeEvent;
         validate();
     }
 
-    public static TypeEvent of(TypeEventEnum typeEvent){
+    public static TypeEvent of(TypeEventEffectEnum typeEvent){
         return new TypeEvent(typeEvent);
     }
 
@@ -24,7 +24,7 @@ public class TypeEvent implements IValueObject {
         ValidateUtils.validateIsString(String.valueOf(typeEvent), "el tipo de evento no puede ser un numero");
     }
 
-    public TypeEventEnum getTypeEvent() {
+    public TypeEventEffectEnum getTypeEvent() {
         return typeEvent;
     }
 

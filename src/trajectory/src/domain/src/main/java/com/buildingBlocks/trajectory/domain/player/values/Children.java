@@ -7,7 +7,7 @@ public class Children implements IValueObject {
     private final int numberOfChildren;
 
     private Children(int numberOfChildren){
-        this.numberOfChildren = numberOfChildren;
+        this.numberOfChildren = 0;
         validate();
     }
 

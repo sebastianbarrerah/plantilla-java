@@ -5,7 +5,6 @@ import com.buildingblocks.shared.domain.generic.Entity;
 import com.buildingblocks.shared.domain.generic.Identity;
 
 public class Properties extends Entity<PlayerId> {
-    private String id;
     private TypeProperty type;
     private Diner value;
     private Address address;
@@ -24,22 +23,29 @@ public class Properties extends Entity<PlayerId> {
         this.address = address;
     }
 
-
-    public String getId() {
-        return id;
-    }
-
+    //region getters and setters
     public TypeProperty getType() {
         return type;
+    }
+
+    public void setType(TypeProperty type) {
+        this.type = type;
     }
 
     public Diner getValue() {
         return value;
     }
 
+    public void setValue(Diner value) {
+        this.value = value;
+    }
+
     public Address getAddress() {
         return address;
     }
 
-
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+    //endregion
 }

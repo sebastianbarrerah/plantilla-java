@@ -26,35 +26,30 @@ public class UniversityCareer extends Entity<PlayerId> {
         this.salary = salary;
     }
 
+    //region getters and setters
     public Name getName() {
         return name;
+    }
+
+    public void setName(Name name) {
+        this.name = name;
     }
 
     public EducationalLevel getEducationalLevel() {
         return educationalLevel;
     }
 
-//    public Salary getSalary() {
-//        Salary.getSalary().getAmount() == 0 ?
-//                system.out.println("No tienes fondos") :
-//                system.out.println("Tienes fondos suficientes");
-//        return salary;
-//    }
-//
-//
-//    public changeEducationalLevel(EducationalLevel educationalLevel){
-//        if(educationalLevel.getLevel() == StatusLevelEnum.UNIVERSITARY){
-//            return educationalLevel.setLevel(StatusLevelEnum.MAGISTER);
-//        }else{
-//            return educationalLevel.setLevel(StatusLevelEnum.PRIMARY);
-//        }
-//    }
-//
-//    public changeAumentoLevel(Salary salary){
-//        if(eduacationalLevel.getLevel() == StatusLevelEnum.MAGISTER){
-//            return salary.setAmount(salary.getAmount() * 2);
-//        }else{
-//            return salary.setAmount(salary.getAmount() * 1.5);
-//        }
-//    }
+    public void setEducationalLevel(EducationalLevel educationalLevel) {
+        this.educationalLevel = educationalLevel;
+    }
+
+    public Salary getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Salary salary) {
+        this.salary = salary;
+    }
+
+    //endregion
 }

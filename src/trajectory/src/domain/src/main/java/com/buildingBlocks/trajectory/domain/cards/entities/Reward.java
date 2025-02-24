@@ -6,12 +6,12 @@ import com.buildingblocks.shared.domain.generic.Identity;
 
 public class Reward extends Entity<CardId> {
 
-    private final NameReward nameReward;
-    private final DescriptionReward descriptionReward;
-    private final TypeReward typeReward;
+    private final String nameReward;
+    private final String descriptionReward;
+    private final String typeReward;
     private final Integer valueReward;
 
-    public Reward(NameReward nameReward, DescriptionReward descriptionReward, TypeReward typeReward, Integer valueReward){
+    public Reward(String nameReward, String descriptionReward, String typeReward, Integer valueReward){
         super(new CardId());
         this.nameReward = nameReward;
         this.descriptionReward = descriptionReward;
@@ -19,7 +19,7 @@ public class Reward extends Entity<CardId> {
         this.valueReward = valueReward;
     }
 
-    public Reward(Identity id, NameReward nameReward, DescriptionReward descriptionReward, TypeReward typeReward, Integer valueReward){
+    public Reward(Identity id, String nameReward, String descriptionReward, String typeReward, Integer valueReward){
         super((CardId) id);
         this.nameReward = nameReward;
         this.descriptionReward = descriptionReward;
@@ -28,31 +28,19 @@ public class Reward extends Entity<CardId> {
     }
 
 
-
-    public NameReward getNameReward() {
+    public String getNameReward() {
         return nameReward;
     }
 
-    public DescriptionReward getDescriptionReward() {
+    public String getDescriptionReward() {
         return descriptionReward;
     }
 
-    public TypeReward getTypeReward() {
+    public String getTypeReward() {
         return typeReward;
     }
 
     public Integer getValueReward() {
         return valueReward;
     }
-
-    public Reward(String nameReward, String descriptionReward, String value, NameReward nameReward1, DescriptionReward descriptionReward1, TypeReward typeReward, Integer valueReward) {
-        super(new CardId());
-        this.nameReward = nameReward1;
-        this.descriptionReward = descriptionReward1;
-        this.typeReward = typeReward;
-        this.valueReward = valueReward;
-    }
-
-
-
 }

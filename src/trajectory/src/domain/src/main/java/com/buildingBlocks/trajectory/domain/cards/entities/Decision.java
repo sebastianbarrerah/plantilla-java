@@ -10,24 +10,24 @@ public class Decision extends Entity<CardId> {
     private DescriptionDecision descriptionDecision;
     private TypeEvent type;
     private ValueDecision value;
-    private Question question;
+    private EffectCard effectCard;
 
-    public Decision(NameDecision nameDecision, DescriptionDecision descriptionDecision, TypeEvent type, ValueDecision value, Question question){
+    public Decision(NameDecision nameDecision, DescriptionDecision descriptionDecision, TypeEvent type, ValueDecision value, EffectCard effectCard){
         super(new CardId());
         this.nameDecision = nameDecision;
         this.descriptionDecision = descriptionDecision;
         this.type = type;
         this.value = value;
-        this.question = question;
+        this.effectCard = effectCard;
     }
 
-    public Decision(Identity id, NameDecision nameDecision, DescriptionDecision descriptionDecision, TypeEvent type, ValueDecision value, Question question){
+    public Decision(Identity id, NameDecision nameDecision, DescriptionDecision descriptionDecision, TypeEvent type, ValueDecision value, EffectCard effectCard){
         super((CardId) id);
         this.nameDecision = nameDecision;
         this.descriptionDecision = descriptionDecision;
         this.type = type;
         this.value = value;
-        this.question = question;
+        this.effectCard = effectCard;
     }
 
 
@@ -64,11 +64,11 @@ public class Decision extends Entity<CardId> {
         this.type = type;
     }
 
-    public Question getQuestion() {
-        return question;
+    public EffectCard getQuestion() {
+        return effectCard;
     }
 
-    public void setQuestion(Question question) {
-        this.question = question;
+    public void setQuestion(EffectCard effectCard) {
+        this.effectCard = effectCard;
     }
 }

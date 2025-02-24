@@ -4,14 +4,14 @@ import com.buildingblocks.shared.domain.generic.IValueObject;
 import com.buildingblocks.shared.domain.utils.ValidateUtils;
 
 public class Salary implements IValueObject {
-    private final long amount;
+    private final Integer amount;
 
-    private Salary(long amount){
+    private Salary(Integer amount){
         this.amount = amount;
         validate();
     }
 
-    public static Salary of(long amount){
+    public static Salary of(Integer amount){
         return new Salary(amount);
     }
 
@@ -23,7 +23,7 @@ public class Salary implements IValueObject {
         ValidateUtils.validateMaxLength(String.valueOf(amount), 10000, "el dinero no puede ser mayor a 10000");
     }
 
-    public long getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 }

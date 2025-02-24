@@ -1,24 +1,26 @@
 package com.buildingBlocks.trajectory.domain.cards;
 
 import com.buildingBlocks.trajectory.domain.cards.entities.Consequence;
-import com.buildingBlocks.trajectory.domain.cards.entities.Decision;
 import com.buildingBlocks.trajectory.domain.cards.entities.Reward;
-import com.buildingBlocks.trajectory.domain.cards.events.CancelledEvent;
+import com.buildingBlocks.trajectory.domain.cards.events.CardApplied;
+import com.buildingBlocks.trajectory.domain.cards.events.CardDiscarded;
 import com.buildingBlocks.trajectory.domain.cards.events.GroupImpact;
 import com.buildingBlocks.trajectory.domain.cards.events.IsRewarded;
 import com.buildingBlocks.trajectory.domain.cards.values.*;
 import com.buildingblocks.shared.domain.generic.AggregateRoot;
+import com.buildingblocks.shared.domain.generic.DomainEvent;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Cards extends AggregateRoot<CardId> {
 
     private Consequence consequence;
-    private Decision decision;
     private List<Reward> rewards = new ArrayList<>();
+    private List<Card> listCards = new ArrayList<>();
     private TypeEvent type;
-    private StateEvent state;
 
+    //region constructores
     public Cards() {
         super(new CardId());
         subscribe(new CardsHandler(this));
@@ -28,13 +30,9 @@ public class Cards extends AggregateRoot<CardId> {
         super(new CardId());
         subscribe(new CardsHandler(this));
     }
+    //endregion
 
-
-
-    public void assignReward(String name, String description, String value, String state, String type) {
-        apply(new IsRewarded(name, description, state, type, value));
-    }
-
+    //region getters and setters
 
 
     public List<Reward> getRewards() {
@@ -42,6 +40,49 @@ public class Cards extends AggregateRoot<CardId> {
     }
 
 
-    public void setState(StateEvent state) {
+    public List<Card> getListCards() {
+        return listCards;
     }
+
+
+    public TypeEvent getType() {
+        return type;
+    }
+
+    public void setType(TypeEvent type) {
+        this.type = type;
+    }
+    //endregion
+
+
+    //region acciones
+    public void cardApplied(String type, String effect) {
+        apply(new CardApplied(type, effect));
+    }
+
+    public void cardDiscarded(String type, String state) {
+        apply(new CardDiscarded(type, state));
+    }
+
+    public void groupImpact(String type, String state, Integer value) {
+        apply(new GroupImpact(type, state, value));
+    }
+
+    public void isRewarded(String nameReward, String descriptionReward, String type, Integer value) {
+        apply(new IsRewarded(nameReward, descriptionReward, type, value));
+    }
+
+    //endregion
+
+
+    //region metodo de recontruccion
+    public static Cards from(final String identity, final List<DomainEvent> events) {
+        Cards cards = new Cards(CardId.of(identity));
+        events.forEach(cards::apply);
+        return cards;
+    }
+    //endregion
+
+
+
 }

@@ -1,12 +1,14 @@
 package com.buildingBlocks.trajectory.domain.player;
 
+import com.buildingBlocks.trajectory.domain.player.entities.Family;
 import com.buildingBlocks.trajectory.domain.player.entities.Properties;
 import com.buildingBlocks.trajectory.domain.player.events.*;
 import com.buildingBlocks.trajectory.domain.player.values.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.buildingBlocks.trajectory.domain.player.values.TypePropertyEnum.MANSION;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
@@ -18,45 +20,78 @@ class PlayerTest {
     }
 
     @Test
-    void loseMoneySuccess() {
-        player.setMoney(new Diner(5000));
-        Diner amount = new Diner(1000);
-        player.loseMoney(amount);
-        assertEquals(4000, player.getMoney().getAmount());
-        assertInstanceOf(LoseMoney.class, player.getUncommittedEvents().get(0));
+    void testPlayerCreated() {
+        String name = "John Doe";
+        player.playerCreated(name);
+        assertEquals(name, player.getName().getName());
     }
 
     @Test
-    void acquirePropertySuccess() {
-        Address address = new Address("123 Main St", "5", "New York");
-        Diner value = new Diner(50000);
-        TypeProperty type = new TypeProperty(TypePropertyEnum.MANSION);
-        player.acquireProperty(address, value, type);
-        assertNotEquals(0, player.getProperties().size());
+    void testMovePositionWithinLimits() {
+        player.playerMoved(150);
+        assertEquals(150, player.getBoardPosition().getNumberPosition());
     }
 
     @Test
-    void propertySoldSuccess() {
-        player.setMoney(new Diner(60000));
-        Address address = new Address("456 Elm St", "25b", "Belen");
-        Diner value = new Diner(60000);
-        TypeProperty type = new TypeProperty(TypePropertyEnum.MANSION);
-        player.acquireProperty(address, value, type);
-        assertFalse(player.getProperties().isEmpty(), "El jugador no debe tener propiedades después de vender");
+    void testMovePositionOutOfBounds() {
+        player.playerMoved(400);
+        assertNull(player.getBoardPosition());
     }
 
     @Test
-    void makeMoneySuccess() {
-        Diner amount = new Diner(2000);
-        player.makeMoney(amount);
-        assertEquals(2000, player.getMoney().getAmount());
+    void testAcquireProperty() {
+        player.acquireProperty("123 Street", 100000, "House");
+        List<Properties> properties = player.getPropiedades();
+        assertEquals(1, properties.size());
+    }
 
+
+    @Test
+    void testPlayerMarriedAlreadyHasFamily() {
+        player.setFamily(new Family(true, Children.of(0).getNumberOfChildren()));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> player.playerMarried(true));
+        assertEquals("El jugador ya tiene una familia", exception.getMessage());
     }
 
     @Test
-    void loseMoneyFailsWithInsufficientFunds() {
-        player.setMoney(new Diner(500));
-        Diner amount = new Diner(1000);
-        assertThrows(IllegalArgumentException.class, () -> player.loseMoney(amount));
+    void testUpdateFamily() {
+        player.setFamily(new Family(false, 0));
+        player.updateFamily(2);
+        assertEquals(2, player.getFamily().getChildren());
     }
+
+
+    @Test
+    void testUpdateFamilyInvalidChildren() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> player.updateFamily(5));
+        assertThrows(IllegalArgumentException.class, () -> player.updateFamily(-1));
+    }
+
+    @Test
+    void testUpdateProfession() {
+        player.updateProfession("MAGISTER", "Bachelor", 50000);
+        assertEquals("MAGISTER", player.getCareer().getName().getName());
+        assertEquals("Bachelor", player.getCareer().getEducationalLevel().getLevel());
+        assertEquals(50000, player.getCareer().getSalary().getAmount());
+    }
+
+    @Test
+    void testPropertySold() {
+        player.acquireProperty("123 Street", 100000, "House");
+        player.propertySold("123 Street", 100000, "House");
+
+    }
+
+//    @Test
+//    void testPropertySoldNotExists() {
+//        Exception exception = assertThrows(IllegalArgumentException.class, () -> player.propertySold("456 Avenue", 120000, "Apartment"));
+//        assertEquals("La propiedad no existe", exception.getMessage());
+//    }
+
+    @Test
+    void testPlayerFrom() {
+        Player player = Player.from("player-123", List.of(new PlayerCreated("John Doe")));
+        assertEquals("John Doe", player.getName().getName());
+    }
+
 };

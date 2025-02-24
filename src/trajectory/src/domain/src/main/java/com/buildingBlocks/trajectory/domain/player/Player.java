@@ -13,78 +13,119 @@ import java.util.List;
 
 public class Player extends AggregateRoot<PlayerId> {
     private UniversityCareer career;
-    private List<Family> family = new ArrayList<>();
-    private List<Properties> properties = new ArrayList<>();
+    private Family family;
+    private List<Properties> propiedades = new ArrayList<>();
     private Name name;
-    private Diner money = new Diner(0);
-    private HealthStatus stateHealth;
+    private Diner money;
     private BoardPosition boardPosition;
-    private State state;
 
     //region constructores
     public Player() {
         super(new PlayerId());
         subscribe(new PlayerHandler(this));
-        apply(new LoseMoney(money));
-        apply(new MakeyMoney(money));
     }
 
     private Player(PlayerId identity) {
         super(identity);
         subscribe(new PlayerHandler(this));
     }
+
     //endregion
 
-    //region getters y setters
-
-    public List<Properties> getProperties() {
-        return properties;
+    //region getters and setters
+    public UniversityCareer getCareer() {
+        return career;
     }
 
+    public void setCareer(UniversityCareer career) {
+        this.career = career;
+    }
+
+    public Family getFamily() {
+        return family;
+    }
+
+    public void setFamily(Family family) {
+        this.family = family;
+    }
+
+    public List<Properties> getPropiedades() {
+        return propiedades;
+    }
+
+    public void setPropiedades(List<Properties> updatedProperties) {
+    }
 
     public Diner getMoney() {
         return money;
     }
 
+    public Name getName() {
+        return name;
+    }
+
+    public void setName(Name name) {
+        this.name = name;
+    }
+
+
     public void setMoney(Diner money) {
-        this.money = money;
+    }
+
+    public BoardPosition getBoardPosition() {
+        return boardPosition;
+    }
+
+    public void setBoardPosition(BoardPosition boardPosition) {
+        this.boardPosition = boardPosition;
+    }
+
+
+    public void setState(State state) {
     }
 
     //endregion
 
-    public void acquireProperty(Address address, Diner value, TypeProperty type) {
+    //region acciones
+    public void playerMoved(Integer position) {
+        apply(new MovePosition(position));
+    }
+
+    public void playerMarried(Boolean isMarried) {
+        apply(new PlayerMarried(isMarried));
+    }
+
+    public void updateFamily(Integer children) {
+        apply(new UpdateFamily(children));
+    }
+
+    public void acquireProperty(String address, Integer value, String type) {
         apply(new AcquiredProperty(address, value, type));
     }
 
-
-    public void sellProperty(PropertySold event) {
-        properties.removeIf(property -> property.getId().equals(event.getId()));
-        this.money = new Diner(this.money.getAmount() + event.getValue());
+    public void updateProfession(String nameProfession, String educationalLevel, Integer salary) {
+        apply(new UpdateProfession(nameProfession, educationalLevel, salary));
     }
 
-
-    public void makeMoney(Diner amount) {
-        validateAmount(amount);
-        this.money = new Diner(this.money.getAmount() + amount.getAmount());
-        apply(new MakeyMoney(money));
+    public void playerCreated(String name) {
+        apply(new PlayerCreated(name));
     }
 
-    private void validateAmount(Diner amount) {
+    public void propertySold(String address, Integer values, String type) {
+        apply(new PropertySold(address, values, type));
     }
+    //endregion
 
-    public void loseMoney(Diner amount) {
-        if (this.money.getAmount() < amount.getAmount()) {
-            throw new IllegalArgumentException("Fondos insuficientes");
-        }
-        this.money = new Diner(this.money.getAmount() - amount.getAmount());
-        apply(new LoseMoney(amount));
-    }
+    //region metodo de recontruccion
 
     public static Player from(final String identity, final List<DomainEvent> events) {
         Player player = new Player(PlayerId.of(identity));
         events.forEach(player::apply);
         return player;
-
     }
+
+
+
+    //endregion
 
 }
