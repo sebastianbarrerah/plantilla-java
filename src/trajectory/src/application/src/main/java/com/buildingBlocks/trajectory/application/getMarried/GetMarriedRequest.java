@@ -3,15 +3,19 @@ package com.buildingBlocks.trajectory.application.getMarried;
 import com.buildingblock.shared.application.Request;
 
 public class GetMarriedRequest extends Request {
-    private final Boolean IsMarried;
+    private Boolean isMarried;
 
-    public GetMarriedRequest(String aggregateId, Boolean IsMarried) {
-        super(aggregateId);
-        this.IsMarried = IsMarried;
+    public GetMarriedRequest() {
+        super(null);
+    }
+
+    public GetMarriedRequest( Boolean isMarried) {
+        super(null);
+        this.isMarried = isMarried;
     }
 
     public Boolean getIsMarried() {
-        return IsMarried;
+        return isMarried;
     }
 
 

@@ -7,8 +7,8 @@ public class AssignCardToPlayerRequest extends Request {
     private final String effect;
 
 
-    protected AssignCardToPlayerRequest(String aggregateId, String type, String effect) {
-        super(aggregateId);
+    protected AssignCardToPlayerRequest(String type, String effect) {
+        super(null);
         this.type = type;
         this.effect = effect;
     }
@@ -20,4 +20,5 @@ public class AssignCardToPlayerRequest extends Request {
     public String getEffect() {
         return effect;
     }
+
 }

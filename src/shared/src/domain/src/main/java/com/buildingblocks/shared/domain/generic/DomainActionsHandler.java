@@ -12,13 +12,13 @@ import java.util.function.Consumer;
 public class DomainActionsHandler {
   private final List<DomainEvent> events = new LinkedList<>();
   private final Map<String, AtomicLong> versions = new ConcurrentHashMap<>();
-  private static final Set<Consumer<? super DomainEvent>> actions = new HashSet<>();
+  private final Set<Consumer<? super DomainEvent>> actions = new HashSet<>();
 
   public List<DomainEvent> getEvents() {
     return events;
   }
 
-  public static void subscribe(final DomainActionsContainer actionsContainer) {
+  public void subscribe(final DomainActionsContainer actionsContainer) {
     actions.addAll(actionsContainer.actions);
   }
 
@@ -36,9 +36,9 @@ public class DomainActionsHandler {
   }
 
   private long increaseVersion(final DomainEvent event) {
-    final AtomicLong version = versions.get(event.getName());
+    final AtomicLong version = versions.get(event.getTableName());
     final long newVersion = version == null ? event.getVersion() : version.incrementAndGet();
-    versions.put(event.getName(), new AtomicLong(newVersion));
+    versions.put(event.getTableName(), new AtomicLong(newVersion));
     return newVersion;
   }
 }

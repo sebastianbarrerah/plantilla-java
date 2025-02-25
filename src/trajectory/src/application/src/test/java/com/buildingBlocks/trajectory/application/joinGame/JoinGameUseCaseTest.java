@@ -1,6 +1,6 @@
 package com.buildingBlocks.trajectory.application.joinGame;
 
-import com.buildingBlocks.trajectory.application.shared.repositorie.IEventsRepository;
+import com.buildingBlocks.trajectory.application.shared.ports.IEventsRepositoryPort;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import reactor.test.StepVerifier;
@@ -10,10 +10,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class JoinGameUseCaseTest {
 
     private final JoinGameUseCase useCase;
-    private final IEventsRepository repository;
+    private final IEventsRepositoryPort repository;
 
     public JoinGameUseCaseTest() {
-        repository = Mockito.mock(IEventsRepository.class);
+        repository = Mockito.mock(IEventsRepositoryPort.class);
         useCase = new JoinGameUseCase(repository);
     }
 

@@ -3,10 +3,14 @@ import com.buildingblocks.shared.domain.generic.DomainEvent;
 
 public class IsRewarded extends DomainEvent {
 
-    private final String nameReward;
-    private final String descriptionReward;
-    private final String type;
-    private final Integer value;
+    private String nameReward;
+    private String descriptionReward;
+    private String type;
+    private Integer value;
+
+    public IsRewarded(){
+        super(NameEventsListEnum.IS_REWARDED.name());
+    }
 
     public String getNameReward() {
         return nameReward;
@@ -30,5 +34,21 @@ public class IsRewarded extends DomainEvent {
 
     public Integer getValue() {
         return value;
+    }
+
+    public void setNameReward(String nameReward) {
+        this.nameReward = nameReward;
+    }
+
+    public void setDescriptionReward(String descriptionReward) {
+        this.descriptionReward = descriptionReward;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setValue(Integer value) {
+        this.value = value;
     }
 }

@@ -4,11 +4,13 @@ public class GetMarriedResponse {
     private final String playerName;
     private final Integer money;
     private final Integer position;
+    private final String message;
 
-    public GetMarriedResponse( String playerName, Integer money, Integer position) {
+    public GetMarriedResponse(String playerName, Integer money, Integer position, String message) {
         this.playerName = playerName;
         this.money = money;
         this.position = position;
+        this.message = message;
     }
 
 
@@ -23,5 +25,9 @@ public class GetMarriedResponse {
 
     public Integer getPosition() {
         return position;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }

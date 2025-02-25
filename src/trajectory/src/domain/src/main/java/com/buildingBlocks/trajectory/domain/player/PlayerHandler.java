@@ -45,7 +45,7 @@ public class PlayerHandler extends DomainActionsContainer {
 
     public Consumer<? extends DomainEvent> playerCreated(Player player) {
         return (PlayerCreated event) -> {
-            player.setName(Name.of(event.getName()));
+            player.setName(Name.of(event.getNamePlayerCreated()));
             player.setState(State.of(StatePlayerEnum.ACTIVE));
             player.setMoney(Diner.of(event.getInitalMoney()));
             player.setBoardPosition(BoardPosition.of(event.getInitalPosition()));
@@ -55,9 +55,6 @@ public class PlayerHandler extends DomainActionsContainer {
     public Consumer<? extends DomainEvent> playerMarried(Player player) {
         return (PlayerMarried event) -> {
             Family family = new Family(event.getIsMarried(), Children.of(0).getNumberOfChildren());
-
-
-
         };
     }
 
@@ -77,7 +74,7 @@ public class PlayerHandler extends DomainActionsContainer {
 
     public Consumer<? extends DomainEvent> updateProfession(Player player) {
         return (UpdateProfession event) -> {
-            UniversityCareer career = new UniversityCareer(Name.of(event.getNameProfession()), EducationalLevel.of(event.getEducationalLevel()), Salary.of(event.getSalary()));
+            UniversityCareer career = new UniversityCareer(Name.of(event.getNameProfession()), EducationalLevel.of(event.getEducationalLevel()));
             player.setCareer(career);
         };
     }

@@ -10,5 +10,6 @@ public enum NameEventsListEnum {
     TAKEN_DECISION,
     UPDATE_REWARD,
     CARD_APPLIED,
-    CARD_DISCARDED
+    CARD_DISCARDED,
+    LIST_CARDS
 }

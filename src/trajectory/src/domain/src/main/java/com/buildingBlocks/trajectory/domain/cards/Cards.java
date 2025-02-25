@@ -2,10 +2,7 @@ package com.buildingBlocks.trajectory.domain.cards;
 
 import com.buildingBlocks.trajectory.domain.cards.entities.Consequence;
 import com.buildingBlocks.trajectory.domain.cards.entities.Reward;
-import com.buildingBlocks.trajectory.domain.cards.events.CardApplied;
-import com.buildingBlocks.trajectory.domain.cards.events.CardDiscarded;
-import com.buildingBlocks.trajectory.domain.cards.events.GroupImpact;
-import com.buildingBlocks.trajectory.domain.cards.events.IsRewarded;
+import com.buildingBlocks.trajectory.domain.cards.events.*;
 import com.buildingBlocks.trajectory.domain.cards.values.*;
 import com.buildingblocks.shared.domain.generic.AggregateRoot;
 import com.buildingblocks.shared.domain.generic.DomainEvent;
@@ -70,6 +67,10 @@ public class Cards extends AggregateRoot<CardId> {
 
     public void isRewarded(String nameReward, String descriptionReward, String type, Integer value) {
         apply(new IsRewarded(nameReward, descriptionReward, type, value));
+    }
+
+    public void listCards() {
+        apply(new ListCards());
     }
 
     //endregion

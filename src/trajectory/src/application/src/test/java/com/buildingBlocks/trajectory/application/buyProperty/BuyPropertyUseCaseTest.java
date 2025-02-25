@@ -1,6 +1,6 @@
 package com.buildingBlocks.trajectory.application.buyProperty;
 
-import com.buildingBlocks.trajectory.application.shared.repositorie.IEventsRepository;
+import com.buildingBlocks.trajectory.application.shared.ports.IEventsRepositoryPort;
 import com.buildingBlocks.trajectory.domain.cards.events.CardApplied;
 import com.buildingBlocks.trajectory.domain.player.events.AcquiredProperty;
 import org.junit.jupiter.api.Test;
@@ -13,10 +13,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class BuyPropertyUseCaseTest {
 
     private final BuyPropertyUseCase useCase;
-    private final IEventsRepository repository;
+    private final IEventsRepositoryPort repository;
 
     public BuyPropertyUseCaseTest() {
-        repository = Mockito.mock(IEventsRepository.class);
+        repository = Mockito.mock(IEventsRepositoryPort.class);
         useCase = new BuyPropertyUseCase(repository);
     }
 

@@ -4,35 +4,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JoinGameResponse {
-    private final String gameId;
-    private final List<Players> players;
-    private final Integer BoardPosition;
-    private final List<CardsMazo> cardsMazo;
+    private final String name;
+    private final String message;
 
-    public JoinGameResponse(String gameId, List<Players> players, Integer boardPosition) {
-        this.gameId = gameId;
-        this.players = players;
-        this.BoardPosition = boardPosition;
-        this.cardsMazo = new ArrayList<>();
+    public JoinGameResponse(String name, String message) {
+        this.name = name;
+        this.message = message;
     }
 
-    //region getters
-    public String getGameId() {
-        return gameId;
+    public String getName() {
+        return name;
     }
 
-    public List<Players> getPlayers() {
-        return players;
+    public String getMessage() {
+        return message;
     }
 
-    public Integer getBoardPosition() {
-        return BoardPosition;
-    }
+    //    private final String gameId;
+//    private final List<Players> players;
+//    private final Integer BoardPosition;
+
+//    public JoinGameResponse(String gameId, Integer boardPosition) {
+//        this.gameId = gameId;
+////        this.players = players;
+//        this.BoardPosition = boardPosition;
+//    }
+//
+//    //region getters
+//    public String getGameId() {
+//        return gameId;
+//    }
+//
+////    public List<Players> getPlayers() {
+////        return players;
+////    }
+//
+//    public Integer getBoardPosition() {
+//        return BoardPosition;
+//    }
 
 
-    public List<CardsMazo> getCardsMazo() {
-        return cardsMazo;
-    }
+
+
     //endregion
 }
 
@@ -68,20 +81,4 @@ public class JoinGameResponse {
     }
 }
 
- class CardsMazo {
-    private final String name;
-    private final String effect;
 
-    public CardsMazo(String name, String effect) {
-        this.name = name;
-        this.effect = effect;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEffect() {
-        return effect;
-    }
-}

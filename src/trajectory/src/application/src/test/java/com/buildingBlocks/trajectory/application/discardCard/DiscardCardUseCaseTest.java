@@ -1,6 +1,6 @@
 package com.buildingBlocks.trajectory.application.discardCard;
 
-import com.buildingBlocks.trajectory.application.shared.repositorie.IEventsRepository;
+import com.buildingBlocks.trajectory.application.shared.ports.IEventsRepositoryPort;
 import com.buildingBlocks.trajectory.domain.cards.events.CardDiscarded;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -11,10 +11,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DiscardCardUseCaseTest {
     private final DiscardCardUseCase useCase;
-    private final IEventsRepository repository;
+    private final IEventsRepositoryPort repository;
 
     public DiscardCardUseCaseTest() {
-        repository = Mockito.mock(IEventsRepository.class);
+        repository = Mockito.mock(IEventsRepositoryPort.class);
         useCase = new DiscardCardUseCase(repository);
     }
 

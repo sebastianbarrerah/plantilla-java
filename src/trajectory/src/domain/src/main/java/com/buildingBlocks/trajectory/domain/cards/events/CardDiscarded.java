@@ -6,8 +6,12 @@ import com.buildingblocks.shared.domain.generic.DomainEvent;
 
 public class CardDiscarded extends DomainEvent {
 
-    private final String type;
-    private final String state;
+    private String type;
+    private String state;
+
+    public CardDiscarded(){
+        super(NameEventsListEnum.CARD_DISCARDED.name());
+    }
 
     public CardDiscarded( String type, String state){
         super(NameEventsListEnum.CARD_DISCARDED.name());
@@ -21,5 +25,13 @@ public class CardDiscarded extends DomainEvent {
 
     public String getState() {
         return state;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

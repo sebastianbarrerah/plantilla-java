@@ -18,9 +18,7 @@ public class Name implements IValueObject {
 
     @Override
     public void validate() {
-        ValidateUtils.validateIsNotBlank(name, "el nombre no puede estar vacio");
-        ValidateUtils.validateIsNotEmpty(name, "el nombre no puede ser null");
-        ValidateUtils.validateIsString(name, "el nombre no puede ser un numero");
+        ValidateUtils.validateIsNotEmpty(name, "el nombre no puede estar vacio");
     }
 
     public String getName() {

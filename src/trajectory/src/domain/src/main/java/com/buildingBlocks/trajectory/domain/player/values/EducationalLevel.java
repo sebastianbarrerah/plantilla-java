@@ -17,7 +17,6 @@ public class EducationalLevel implements IValueObject {
 
     @Override
     public void validate() {
-        ValidateUtils.validateIsNotBlank(String.valueOf(level), "el nivel de educacion no puede estar vacio");
         ValidateUtils.validateIsNotEmpty(String.valueOf(level), "el nivel de educacion no puede ser null");
     }
 

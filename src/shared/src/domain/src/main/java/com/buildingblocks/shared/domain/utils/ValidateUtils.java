@@ -18,7 +18,7 @@ public class ValidateUtils {
 
     public static Object validateIsNotBlank(String atributo, String message){
         if(atributo.isBlank()){
-            throw new IllegalArgumentException(message);
+            return atributo;
         }
         return atributo;
     }

@@ -1,6 +1,6 @@
 package com.buildingBlocks.trajectory.application.assignCardToPlayer;
 
-import com.buildingBlocks.trajectory.application.shared.repositorie.IEventsRepository;
+import com.buildingBlocks.trajectory.application.shared.ports.IEventsRepositoryPort;
 import com.buildingBlocks.trajectory.domain.cards.events.CardApplied;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -13,10 +13,10 @@ class AssignCardToPlayerUseCaseTest {
 
 
     private final AssignCardToPlayerUseCase useCase;
-    private final IEventsRepository repository;
+    private final IEventsRepositoryPort repository;
 
     public AssignCardToPlayerUseCaseTest() {
-        repository = Mockito.mock(IEventsRepository.class);
+        repository = Mockito.mock(IEventsRepositoryPort.class);
         useCase = new AssignCardToPlayerUseCase(repository);
     }
 

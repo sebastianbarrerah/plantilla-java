@@ -1,6 +1,6 @@
 package com.buildingBlocks.trajectory.application.changeCareer;
 
-import com.buildingBlocks.trajectory.application.shared.repositorie.IEventsRepository;
+import com.buildingBlocks.trajectory.application.shared.ports.IEventsRepositoryPort;
 import com.buildingBlocks.trajectory.domain.cards.events.CardApplied;
 import com.buildingBlocks.trajectory.domain.cards.events.IsRewarded;
 import com.buildingBlocks.trajectory.domain.player.events.UpdateProfession;
@@ -13,10 +13,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ChangeCareerUseCaseTest {
     private final ChangeCareerUseCase useCase;
-    private final IEventsRepository repository;
+    private final IEventsRepositoryPort repository;
 
     public ChangeCareerUseCaseTest() {
-        repository = Mockito.mock(IEventsRepository.class);
+        repository = Mockito.mock(IEventsRepositoryPort.class);
         useCase = new ChangeCareerUseCase(repository);
     }
 

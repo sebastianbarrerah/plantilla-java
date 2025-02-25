@@ -1,6 +1,6 @@
 package com.buildingBlocks.trajectory.application.getMarried;
 
-import com.buildingBlocks.trajectory.application.shared.repositorie.IEventsRepository;
+import com.buildingBlocks.trajectory.application.shared.ports.IEventsRepositoryPort;
 import com.buildingBlocks.trajectory.domain.cards.events.IsRewarded;
 import com.buildingBlocks.trajectory.domain.player.events.PlayerMarried;
 import org.junit.jupiter.api.Test;
@@ -13,10 +13,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class GetMarriedUseCaseTest {
 
     private final GetMarriedUseCase useCase;
-    private final IEventsRepository repository;
+    private final IEventsRepositoryPort repository;
 
     public GetMarriedUseCaseTest() {
-        repository = Mockito.mock(IEventsRepository.class);
+        repository = Mockito.mock(IEventsRepositoryPort.class);
         useCase = new GetMarriedUseCase(repository);
     }
 

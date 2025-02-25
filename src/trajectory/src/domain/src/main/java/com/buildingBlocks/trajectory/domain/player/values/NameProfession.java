@@ -17,7 +17,6 @@ public class NameProfession implements IValueObject {
 
     @Override
     public void validate() {
-        ValidateUtils.validateIsNotBlank(nameValue, "el nombre de la profesion no puede estar vacio");
         ValidateUtils.validateIsNotEmpty(nameValue, "el nombre de la profesion no puede ser null");
         ValidateUtils.validateIsString(nameValue, "el nombre de la profesion no puede ser un numero");
     }

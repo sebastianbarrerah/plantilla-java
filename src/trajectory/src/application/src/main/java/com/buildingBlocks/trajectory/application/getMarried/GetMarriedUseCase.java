@@ -1,6 +1,6 @@
 package com.buildingBlocks.trajectory.application.getMarried;
 
-import com.buildingBlocks.trajectory.application.shared.repositorie.IEventsRepository;
+import com.buildingBlocks.trajectory.application.shared.ports.IEventsRepositoryPort;
 import com.buildingBlocks.trajectory.domain.cards.Cards;
 import com.buildingBlocks.trajectory.domain.cards.values.TypeEventEffectEnum;
 import com.buildingBlocks.trajectory.domain.player.Player;
@@ -9,32 +9,35 @@ import reactor.core.publisher.Mono;
 
 public class GetMarriedUseCase implements ICommandUseCase<GetMarriedRequest, Mono<GetMarriedResponse>> {
 
-    private final IEventsRepository repository;
+    private final IEventsRepositoryPort repository;
 
-    public GetMarriedUseCase(IEventsRepository repository) {
+    public GetMarriedUseCase(IEventsRepositoryPort repository) {
         this.repository = repository;
     }
 
     @Override
     public Mono<GetMarriedResponse> execute(GetMarriedRequest request) {
-        return repository
-                .findEventsByAggregateId(request.getAggregateId())
-                .collectList()
-                .map(events -> {
-                    Player player = Player.from(request.getAggregateId(), events);
-                    Cards cards = Cards.from(request.getAggregateId(), events);
+              Player player = new Player();
+              Cards cards = new Cards();
 
-                    player.playerMarried(request.getIsMarried());
-                    cards.isRewarded("Recompensa por casarse", "Recompensa por casarse", TypeEventEffectEnum.PLAYER.name(), 100);
+              player.playerMarried(request.getIsMarried());
+              cards.isRewarded("Recompensa por cambiar de carrera", "Recompensa por cambiar de carrera", TypeEventEffectEnum.PLAYER.name(), 100);
 
-                    player.getUncommittedEvents().forEach(repository::save);
-                    player.markEventsAsCommitted();
+        String message = request.getIsMarried()
+                ? "¡Felicidades! Ahora estás casado."
+                : "Has decidido no casarte en este turno.";
 
-                    return new GetMarriedResponse(
-                            "Juan",
-                            100,
-                            0
-                    );
-                });
+              player.getUncommittedEvents().forEach(repository::save);
+              player.markEventsAsCommitted();
+
+              cards.getUncommittedEvents().forEach(repository::save);
+              cards.markEventsAsCommitted();
+
+              return Mono.just(new GetMarriedResponse(
+                      "jugador 1",
+                      100,
+                      0,
+                      "¡Felicidades! Ahora estás casado."
+              ));
     }
 }

@@ -5,13 +5,15 @@ import com.buildingblocks.shared.domain.generic.DomainEvent;
 public class UpdateProfession extends DomainEvent {
     private String nameProfession;
     private String educationalLevel;
-    private Integer salary;
 
-    public UpdateProfession(String nameProfession, String educationalLevel, Integer salary){
+    public UpdateProfession(){
+        super(EventsNameEnum.UPDATE_PROFESSION.name());
+    }
+
+    public UpdateProfession(String nameProfession, String educationalLevel){
         super(EventsNameEnum.UPDATE_PROFESSION.name());
         this.nameProfession = nameProfession;
         this.educationalLevel = educationalLevel;
-        this.salary = salary;
     }
 
 
@@ -23,7 +25,14 @@ public class UpdateProfession extends DomainEvent {
         return educationalLevel;
     }
 
-    public Integer getSalary() {
-        return salary;
+
+    public void setNameProfession(String nameProfession) {
+        this.nameProfession = nameProfession;
     }
+
+    public void setEducationalLevel(String educationalLevel) {
+        this.educationalLevel = educationalLevel;
+    }
+
+
 }

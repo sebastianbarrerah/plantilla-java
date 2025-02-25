@@ -103,13 +103,17 @@ public class Player extends AggregateRoot<PlayerId> {
         apply(new AcquiredProperty(address, value, type));
     }
 
-    public void updateProfession(String nameProfession, String educationalLevel, Integer salary) {
-        apply(new UpdateProfession(nameProfession, educationalLevel, salary));
+    public void updateProfession(String nameProfession, String educationalLevel) {
+        apply(new UpdateProfession(nameProfession, educationalLevel));
     }
 
     public void playerCreated(String name) {
+        if (name == null){
+            name = "Jugador1";
+        }
         apply(new PlayerCreated(name));
     }
+
 
     public void propertySold(String address, Integer values, String type) {
         apply(new PropertySold(address, values, type));

@@ -7,8 +7,8 @@ public class BuyPropertyRequest extends Request {
     private final Integer value;
     private final String type;
 
-    public BuyPropertyRequest(String aggregateId, String address, Integer value, String type) {
-        super(aggregateId);
+    public BuyPropertyRequest( String address, Integer value, String type) {
+        super(null);
         this.address = address;
         this.value = value;
         this.type = type;

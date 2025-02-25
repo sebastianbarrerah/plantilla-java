@@ -1,10 +1,7 @@
 package com.buildingBlocks.trajectory.domain.cards;
 
 import com.buildingBlocks.trajectory.domain.cards.entities.Reward;
-import com.buildingBlocks.trajectory.domain.cards.events.CardApplied;
-import com.buildingBlocks.trajectory.domain.cards.events.CardDiscarded;
-import com.buildingBlocks.trajectory.domain.cards.events.GroupImpact;
-import com.buildingBlocks.trajectory.domain.cards.events.IsRewarded;
+import com.buildingBlocks.trajectory.domain.cards.events.*;
 import com.buildingBlocks.trajectory.domain.cards.values.Card;
 import com.buildingBlocks.trajectory.domain.cards.values.TypeEventEffectEnum;
 import com.buildingblocks.shared.domain.generic.DomainActionsContainer;
@@ -14,7 +11,7 @@ import java.util.function.Consumer;
 
 public class CardsHandler extends DomainActionsContainer {
 
-    public CardsHandler(Cards cardEvent){
+    public CardsHandler(Cards cardEvent) {
         add(cardApplied(cardEvent));
         add(cardDiscarded(cardEvent));
         add(groupImpact(cardEvent));
@@ -32,7 +29,7 @@ public class CardsHandler extends DomainActionsContainer {
     public Consumer<? extends DomainEvent> cardDiscarded(Cards cardEvent) {
         return (CardDiscarded event) -> {
             cardEvent.getListCards().add(Card.of("type", "effect", 0));
-                cardEvent.getListCards().remove(cardEvent.getListCards().size() - 1);
+            cardEvent.getListCards().remove(cardEvent.getListCards().size() - 1);
         };
     }
 
@@ -53,10 +50,14 @@ public class CardsHandler extends DomainActionsContainer {
     }
 
 
+    public Consumer<? extends DomainEvent> listCards(Cards cardEvent) {
+        return (ListCards event) -> {
+            if (cardEvent.getListCards().isEmpty()) {
+                cardEvent.getListCards().add(Card.of("type", "effect", 0));
+            }
+            cardEvent.getListCards().size();
+        };
 
-
+    }
 
 }
-
-
-

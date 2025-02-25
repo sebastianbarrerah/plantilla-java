@@ -1,6 +1,6 @@
 package com.buildingBlocks.trajectory.application.joinGame;
 
-import com.buildingBlocks.trajectory.application.shared.repositorie.IEventsRepository;
+import com.buildingBlocks.trajectory.application.shared.ports.IEventsRepositoryPort;
 import com.buildingBlocks.trajectory.domain.player.Player;
 import com.buildingblock.shared.application.ICommandUseCase;
 import reactor.core.publisher.Mono;
@@ -10,14 +10,15 @@ import java.util.List;
 
 public class JoinGameUseCase implements ICommandUseCase<JoinGameRequest, Mono<JoinGameResponse>> {
 
-    private final IEventsRepository repository;
+    private final IEventsRepositoryPort repository;
 
-    public JoinGameUseCase(IEventsRepository repository) {
+    public JoinGameUseCase(IEventsRepositoryPort repository) {
         this.repository = repository;
     }
 
     @Override
     public Mono<JoinGameResponse> execute(JoinGameRequest request) {
+
 
         Player player = new Player();
         player.playerCreated(request.getPlayerName());
@@ -25,16 +26,8 @@ public class JoinGameUseCase implements ICommandUseCase<JoinGameRequest, Mono<Jo
         player.getUncommittedEvents().forEach(repository::save);
         player.markEventsAsCommitted();
 
-        List<Players> jugadores = new ArrayList<>();
-        jugadores.add(new Players(request.getPlayerName()));
+        return Mono.just(new JoinGameResponse(player.getName().getName(), "El jugador ha sido creado con exito"));
+    }
 
-        return Mono.just(
-                new JoinGameResponse(
-                        player.getIdentity().getValue(),
-                        jugadores,
-                        player.getBoardPosition().getNumberPosition()
-                )
-        );
 
-    };
 }

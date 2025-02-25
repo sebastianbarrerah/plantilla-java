@@ -6,9 +6,8 @@ public class DiscardCardRequest extends Request {
     private final String typeCard;
     private final String stateCard;
 
-
-    public DiscardCardRequest(String aggregateId, String typeCard, String stateCard) {
-        super(aggregateId);
+    public DiscardCardRequest(String typeCard, String stateCard) {
+        super(null);
         this.typeCard = typeCard;
         this.stateCard = stateCard;
     }
